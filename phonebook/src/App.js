@@ -18,12 +18,17 @@ const App = () => {
       id:1
     }
     setPersons(persons.concat(noteObject))
+    const isPerson =persons.some(p=>p.name===newName)
+
+      if(isPerson){
+      window.alert(`${newName} is already part of the phonebook`)
+    }
     setNewName('')
   }
 
   return (
     <div>
-      <h2>Phonebook</h2>
+      <h2>Phonebook</h2> 
       <form onSubmit={addPerson} >
         <div>
           name: <input value={newName} onChange={name} />
@@ -34,7 +39,7 @@ const App = () => {
       </form>
       <h2>Numbers</h2>
       {persons.map((names)=>{
-        return <div> {names.name}</div>
+        return <div> <p key={names.name}>{names.name}</p></div>
       })}
     </div>
   )
