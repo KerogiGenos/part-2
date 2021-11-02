@@ -2,12 +2,17 @@ import React, { useState } from 'react'
 
 const App = () => {
   const [ persons, setPersons ] = useState([
-    { name: 'Arto Hellas' }
+    { name: 'Arto Hellas', number: 12345678 }
   ]) 
   const [ newName, setNewName ] = useState('')
+  const [newNumber, setNewNumber] = useState()
 
   const name=(name)=>{
     setNewName(name.target.value)
+  }
+
+  const number=(number)=>{
+    setNewNumber(number.target.value)
   }
 
   const  addPerson= (event) => {
@@ -15,7 +20,9 @@ const App = () => {
     const noteObject = {
 
       name: newName,
-      id:1
+      number:newNumber
+      
+      
     }
     setPersons(persons.concat(noteObject))
     const isPerson =persons.some(p=>p.name===newName)
@@ -24,6 +31,7 @@ const App = () => {
       window.alert(`${newName} is already part of the phonebook`)
     }
     setNewName('')
+    setNewNumber('')
   }
 
   return (
@@ -33,13 +41,14 @@ const App = () => {
         <div>
           name: <input value={newName} onChange={name} />
         </div>
+        <div>number: <input value={newNumber} onChange={number} /></div>
         <div>
           <button type="submit">add</button>
         </div>
       </form>
       <h2>Numbers</h2>
       {persons.map((names)=>{
-        return <div> <p key={names.name}>{names.name}</p></div>
+        return <div> <p key={names.name}>{names.name} {names.number} </p></div>
       })}
     </div>
   )
